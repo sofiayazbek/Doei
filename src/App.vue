@@ -1,10 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container.is-widescreen">
 
     <v-nav-bar />
-
-    <router-view />
-
+<section class="section">
+  <router-view />
+</section>
+  
     <v-footer-bar />
 
   </div>

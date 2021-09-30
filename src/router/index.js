@@ -2,7 +2,17 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '@/views/home.vue';
+import Sobrenos from '@/views/sobrenos.vue';
+import Instituicoesparceiras from '@/views/instituicoesparceiras.vue';
+import Transparencia from '@/views/transparencia.vue';
+import Perguntasfrequentes from '@/views/perguntasfrequentes.vue';
 import Contato from '@/views/contato.vue';
+
+import Cadastro from '@/views/cadastro.vue';
+import Carrinho from '@/views/carrinho.vue';
+
+import Sopadatiacelina from '@/views/sopadatiacelina.vue';
+import Institutoficacomigo from '@/views/institutoficacomigo.vue';
 
 const routes = [
     {
@@ -12,13 +22,60 @@ const routes = [
         meta: {  }
     },
     {
+        path: '/sobrenos',
+        name: 'Sobre nós',
+        component: Sobrenos,
+        meta: {  }
+    },
+    {
+        path: '/instituicoesparceiras',
+        name: 'Instituições Parceiras',
+        component: Instituicoesparceiras,
+        meta: {  }
+    },
+   {
+        path: '/transparencia',
+        name: 'Transparência',
+        component: Transparencia,
+        meta: {  }
+    },
+   {
+        path: '/perguntasfrequentes',
+        name: 'Perguntas Frequentes',
+        component: Perguntasfrequentes,
+        meta: {  }
+    },
+   {
         path: '/contato',
         name: 'Contato',
         component: Contato,
         meta: {  }
-    }
+    },
+   {
+        path: '/cadastro',
+        name: 'Cadastro',
+        component: Cadastro,
+        meta: {  }
+    },
+   {
+        path: '/carrinho',
+        name: 'Carrinho',
+        component: Carrinho,
+        meta: {  }
+    },
+   {
+        path: '/sopadatiacelina',
+        name: 'Sopa da Tia Celina',
+        component: Sopadatiacelina,
+        meta: {  }
+    },
+   {
+        path: '/institutoficacomigo',
+        name: 'Instituto Fica Comigo',
+        component: Institutoficacomigo,
+        meta: {  }
+    }    
 ]
-
 Vue.use(VueRouter);
 
 const router = new VueRouter({

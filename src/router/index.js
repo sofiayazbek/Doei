@@ -13,6 +13,7 @@ import Carrinho from '@/views/carrinho.vue';
 
 import Sopadatiacelina from '@/views/sopadatiacelina.vue';
 import Institutoficacomigo from '@/views/institutoficacomigo.vue';
+import Instituicao from '@/views/instituicao.vue';
 
 const routes = [
     {
@@ -74,7 +75,13 @@ const routes = [
         name: 'Instituto Fica Comigo',
         component: Institutoficacomigo,
         meta: {  }
-    }    
+    },
+   {
+        path: '/instituicao/:id',
+        name: 'Instituicao',
+        component: Instituicao,
+        meta: {  }
+    }      
 ]
 Vue.use(VueRouter);
 

@@ -47,7 +47,7 @@
 
     <div class="columns">
           <!-- Primeira coluna -->
-          <div class="column is-4">
+          <div v-for="(instituicao, index) in instituicoes" :key="index" class ="column is-4">
             
             <div class="box">
               <div class="columns has-text-centered">
@@ -57,11 +57,11 @@
                     src="@/assets/sopadatiacelina.png">
                 </figure>  
                 <br>            
-                <h1 class="title">Sopa da Tia Celina</h1>
+                <h1 class="title">{{instituicao.nome}}</h1>
                 <br>
-                <h5 class="subtitle is-5">Um trabalho 100% voluntário, onde produzem uma deliciosa sopa no qual são distribuidas para pessoas em situação de vulnerabilidade em diferentes regiões de Curitiba.</h5>
+                <h5 class="subtitle is-5">{{instituicao.descricao}}</h5>
                 <a href="#/sopadatiacelina">
-                  <button class="button is-normal">Ajudar</button>
+                  <router-link :to="{name:'Instituicao',params:{id:instituicao.id}}" class="button is-normal">Ajudar</router-link>
                   </a>
                 </div>
               </div>
@@ -75,31 +75,6 @@
 
 
 
-          <!-- Segunda coluna -->
-          <div class="column is-4">
-
-            <div class="box">
-              <div class="columns has-text-centered">
-                <div class="column">
-                  <figure class="image is-2by1">
-                  <img src="@/assets/institutoficacomigo.png">
-                  </figure>  
-                <br>            
-                <h1 class="title">Instituto Fica Comigo</h1>
-                <br>
-                <h2 class="subtitle">O Instituto é uma ONG curitibana, registrada no CRMV, que atua há mais de 10 anos em Curitiba e região que trabalha no controle populacional de cães e gatos.</h2>
-              
-                <a href="#/institutoficacomigo">
-                  <button class="button is-normal">Ajudar</button>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            
- 
-
-          </div>
 
           <!-- Terceira coluna -->
           <div class="column is-4">
@@ -132,3 +107,20 @@
 
   </div>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                instituicoes: []
+            }
+        },
+        created() {
+          var self = this;
+          this.axios.get('instituicoes/').then((response) => {
+            self.instituicoes = response.data;
+          })
+        }
+    }
+        
+</script>

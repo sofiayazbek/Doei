@@ -16,14 +16,14 @@
                 <h1 class="title has-text-centered">Dados Pessoais</h1>
 
               <b-field label="Nome" :label-position="labelPosition">
-                  <b-input value="  "></b-input>
+                  <b-input v-model="doador.nome" value="  "></b-input>
               </b-field>
               <b-field label="Sobrenome" :label-position="labelPosition">
-                  <b-input value=" "></b-input>
+                  <b-input v-model="doador.sobrenome" value=" "></b-input>
               </b-field>
 
               <b-field label="Data de Nascimento" :label-position="labelPosition">
-                  <b-datepicker
+                  <b-datepicker v-model="doador.data"
                       placeholder="Aperte para selecionar..."
                       icon="calendar-today"
                       trap-focus>
@@ -35,9 +35,9 @@
             <b-step-item step="2" :visible="showSocial" label="Login" :clickable="isStepsClickable">
                 <h1 class="title has-text-centered">Dados de Acesso ao Site</h1>
 
-              <b-field label="Email"
+              <b-field label="Email" 
                   :label-position="labelPosition">
-                  <b-input type="email"
+                  <b-input v-model="doador.email" type="email"
                       value=""
                       maxlength="30">
                   </b-input>
@@ -45,7 +45,7 @@
 
               <b-field label="Senha"
                   :label-position="labelPosition">
-                  <b-input value="" type="password" maxlength="30"></b-input>
+                  <b-input v-model="doador.senha" value="" type="password" maxlength="30"></b-input>
               </b-field>
             </b-step-item>
 
@@ -57,7 +57,7 @@
               <b-field>
                 <b-checkbox>Eu concordo com os Termos e Condições de Uso da Doei.</b-checkbox>
               </b-field>
-              <b-button type="is-primary">Cadastrar</b-button>
+              <b-button @click="cadastrar()" type="is-primary">Cadastrar</b-button>
 
             </b-step-item>
 
@@ -103,8 +103,23 @@
 export default {
     data() {
         return {
-            labelPosition: 'on-border'
+            labelPosition: 'on-border',
+            doador:{
+            }
         }
-    }
-}
+    },
+
+    methods: {
+      cadastrar() {
+          var self = this;
+          //Chama a api para criar o usuário
+          this.axios.post('doadores-create/', this.doador).then((response) => {
+            console.log(response);
+
+            //Mostra a mensagem de sucesso
+            self.$buefy.dialog.alert('Cadastro realizado com sucesso!')
+          })        
+      }
+    } 
+ }
 </script>

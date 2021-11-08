@@ -57,6 +57,7 @@
               <b-field>
                 <b-checkbox>Eu concordo com os Termos e Condições de Uso da Doei.</b-checkbox>
               </b-field>
+              
               <b-button @click="cadastrar()" type="is-primary">Cadastrar</b-button>
 
             </b-step-item>

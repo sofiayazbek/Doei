@@ -1,24 +1,25 @@
-\<template>
+<template>
     <section class="section">
         <h1 class="title">Entre em contato com a Doei</h1>
         <hr style="width:70px; background-color:#ff0000">
 
         <section>
             <b-field label="Nome">
-                <b-input v-model="name"></b-input>
+                <b-input v-model="contato.nome">
+                </b-input>
             </b-field>
 
             <b-field label="Email"
                message=" ">
-                <b-input type="email"
-                   value="nome@mail.com"
-                    maxlength="30">
+                <b-input v-model="contato.email" type="email"
+                   value="">
                </b-input>
            </b-field>
 
             <b-field label="Telefone para contato"
                message=" ">
-               <b-input value="(XX) XXXXX-XXXX" maxlength="15"></b-input>
+               <b-input v-model="contato.telefone" value="" >
+               </b-input>
            </b-field>
 
             <b-field label="Assunto">
@@ -33,20 +34,43 @@
             </b-field>
 
            <b-field label="Sua Mensagem">
-                <b-input maxlength="200" type="textarea"></b-input>
+                <b-input v-model="contato.mensagem"  type="textarea"></b-input>
            </b-field>
-           <b-button type="is-primary">Enviar</b-button>
+           
+           <b-button @click="enviar()" type="is-primary">Enviar</b-button>
         </section>
 
     </section>
 </template>
 
+
+
+
 <script>
-    export default {
-        data() {
-            return {
-                name: 'Nome Completo'
+export default {
+    props: ['canCancel'],
+    data(){
+        return {
+            contato: {
+              nome: '',
+              email: '',
+              telefone: '',
+              mensagem: '',
             }
         }
-    }
+    },  
+
+    methods: {
+      enviar() {
+          var self = this;
+          //Chama a api para criar a mensagem
+          this.axios.post('contatos-create/', this.contato).then((response) => {
+            console.log(response);
+
+            //Mostra a mensagem de sucesso
+            self.$buefy.dialog.alert('Mensagem enviada com sucesso!')
+          })        
+      }
+    }  
+}
 </script>

@@ -23,15 +23,15 @@
            </b-field>
 
             <b-field label="Assunto">
-              <b-select placeholder="--Selecione--">
-                <option value="1">Dúvidas</option>
-                <option value="2">Virar uma Instituição Parceira</option>
-                <option value="3">Sugestões</option>
-                <option value="4">Reclamações</option>
-                <option value="5">Elogios</option>
-                <option value="6">Outro</option>
-              </b-select>
-            </b-field>
+                <b-select v-model="contato.assunto" placeholder="Selecione um assunto" expanded="true">
+                    <option
+                        v-for="assunto in assuntos"
+                        :value="assunto.id"
+                        :key="assunto.id">
+                        {{ assunto.nome }}
+                    </option>
+                </b-select>
+            </b-field> 
 
            <b-field label="Sua Mensagem">
                 <b-input v-model="contato.mensagem"  type="textarea"></b-input>
@@ -56,9 +56,19 @@ export default {
               email: '',
               telefone: '',
               mensagem: '',
-            }
+              assunto: null
+            },
+            assuntos: []
         }
     },  
+
+    created() {
+      var self = this;
+      //Chama a api para buscar os assuntos
+      this.axios.get('assuntos/').then((response) => {
+        self.assuntos = response.data;
+      })  
+    },
 
     methods: {
       enviar() {

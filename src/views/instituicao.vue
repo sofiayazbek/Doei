@@ -5,7 +5,7 @@
 <div class="columns has-text-centered">
       <div class="column is-4">
         <figure class="image is-5by3">
-          <img src="@/assets/sopadatiacelina.png">
+          <img v-if="instituicao.fotoCapa" :src="instituicao.fotoCapa">
         </figure>              
       </div>
 
@@ -24,20 +24,21 @@
         <div class="card">
           <div class="card-image">
             <figure class="image is-5by3">
-              <img src="@/assets/feijao.png">
+              <img v-if="produto.fotoCapa" :src="produto.fotoCapa">
             </figure>
           </div>
           <div class="card-content">
             <div class="media">
               <div class="media-left">
               </div>
-              <div class="media-content">
+              <div class="media-content has-text-centered">
                 <p class="title is-4">{{produto.nome}}</p>
-                <p class="subtitle is-6">{{produto.preco}}</p>
+                <p class="subtitle is-6">{{produto.descricao}}</p>
+                <p class="subtitle is-6">R$ {{produto.preco}}</p>
               </div>
             </div>
 
-            <div class="content">
+            <div class="content has-text-centered">
 
               <br>
               <a href="#/carrinho">

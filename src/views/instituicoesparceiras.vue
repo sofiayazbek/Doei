@@ -53,8 +53,7 @@
               <div class="columns has-text-centered">
                 <div class="column ">
                   <figure class="image is-2by1">
-                    <img 
-                    src="@/assets/sopadatiacelina.png">
+                    <img v-if="instituicao.fotoCapa" :src="instituicao.fotoCapa">
                 </figure>  
                 <br>            
                 <h1 class="title">{{instituicao.nome}}</h1>

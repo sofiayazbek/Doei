@@ -10,6 +10,7 @@ import Contato from '@/views/contato.vue';
 
 import Cadastro from '@/views/cadastro.vue';
 import Carrinho from '@/views/carrinho.vue';
+import Pagamento from '@/views/pagamento.vue';
 
 import Sopadatiacelina from '@/views/sopadatiacelina.vue';
 import Institutoficacomigo from '@/views/institutoficacomigo.vue';
@@ -62,6 +63,12 @@ const routes = [
         path: '/carrinho',
         name: 'Carrinho',
         component: Carrinho,
+        meta: {  }
+    },
+   {
+        path: '/pagamento',
+        name: 'Pagamento',
+        component: Pagamento,
         meta: {  }
     },
    {

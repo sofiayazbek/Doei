@@ -57,7 +57,7 @@
         </b-table>
         
       <br>
-      <a>
+      <a href="#/pagamento">
         <button class="button is-danger">Continuar</button>
       </a>
 

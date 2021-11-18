@@ -12,7 +12,7 @@
 
       <br>
       <a>
-        <button class="button is-danger">Continuar</button>
+        <button class="button is-danger">Enviar comprovante</button>
       </a>
 
     </section>

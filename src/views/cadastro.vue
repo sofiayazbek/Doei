@@ -1,126 +1,93 @@
 <template>
     <section>
+      <h1 class="title has-text-centered">Dados Pessoais</h1>
 
-        <b-steps
-            v-model="activeStep"
-            :animated="isAnimated"
-            :rounded="isRounded"
-            :has-navigation="hasNavigation"
-            :icon-prev="prevIcon"
-            :icon-next="nextIcon"
-            :label-position="labelPosition"
-            :mobile-mode="mobileMode">
+      <b-field label="Nome" :label-position="labelPosition">
+          <b-input v-model="doador.nome" ></b-input>
+      </b-field>
+      <b-field label="Sobrenome" :label-position="labelPosition">
+          <b-input v-model="doador.sobrenome" ></b-input>
+      </b-field>
 
+      <b-field label="Data de Nascimento" :label-position="labelPosition">
+          <date-pick v-model="doador.data"
+                         :format="'YYYY-MM-DD'"
+                         :displayFormat="'DD/MM/YYYY'"
+                         >
 
-            <b-step-item step="1" label="Perfil" :clickable="isStepsClickable" :type="{'is-success': isProfileSuccess}">
-                <h1 class="title has-text-centered">Dados Pessoais</h1>
-
-              <b-field label="Nome" :label-position="labelPosition">
-                  <b-input v-model="doador.nome" value="  "></b-input>
-              </b-field>
-              <b-field label="Sobrenome" :label-position="labelPosition">
-                  <b-input v-model="doador.sobrenome" value=" "></b-input>
-              </b-field>
-
-              <b-field label="Data de Nascimento" :label-position="labelPosition">
-                  <b-datepicker v-model="doador.data"
-                      placeholder="Aperte para selecionar..."
-                      icon="calendar-today"
-                      trap-focus>
-                  </b-datepicker>
-              </b-field>
-            </b-step-item>
+          </date-pick>        
+      </b-field>
 
 
-            <b-step-item step="2" :visible="showSocial" label="Login" :clickable="isStepsClickable">
-                <h1 class="title has-text-centered">Dados de Acesso ao Site</h1>
+      <h1 class="title has-text-centered">Dados de Acesso ao Site</h1>
+      <b-field label="Email" 
+          :label-position="labelPosition">
+          <b-input v-model="doador.email" type="email"
+              readonly="true"
+              disabled
+              >
+          </b-input>
+      </b-field>
 
-              <b-field label="Email" 
-                  :label-position="labelPosition">
-                  <b-input v-model="doador.email" type="email"
-                      value=""
-                      maxlength="30">
-                  </b-input>
-              </b-field>
-
-              <b-field label="Senha"
-                  :label-position="labelPosition">
-                  <b-input v-model="doador.senha" value="" type="password" maxlength="30"></b-input>
-              </b-field>
-            </b-step-item>
-
-            <b-step-item :step="showSocial ? '4' : '3'" label="Finish" :clickable="isStepsClickable" disabled>
-                <h1 class="title has-text-centered">Finalizar</h1>
-              <b-field>
-                <b-checkbox>Quero receber mensagens de novas campanhas para as Instituições.</b-checkbox>
-              </b-field>
-              <b-field>
-                <b-checkbox>Eu concordo com os Termos e Condições de Uso da Doei.</b-checkbox>
-              </b-field>
-              
-              <b-button @click="cadastrar()" type="is-primary">Cadastrar</b-button>
-
-            </b-step-item>
-
-
-
-            <template
-                v-if="customNavigation"
-                #navigation="{previous, next}">
-                <b-button
-                    outlined
-                    type="is-danger"
-                    icon-pack="fas"
-                    icon-left="backward"
-                    :disabled="previous.disabled"
-                    @click.prevent="previous.action">
-                    Previous
-                </b-button>
-                <b-button
-                    outlined
-                    type="is-success"
-                    icon-pack="fas"
-                    icon-right="forward"
-                    :disabled="next.disabled"
-                    @click.prevent="next.action">
-                    Next
-                </b-button>
-            </template>
-        </b-steps>
-
-
-
-
-
-
-
-
+      <b-field>
+        <b-checkbox>Quero receber mensagens de novas campanhas para as Instituições.</b-checkbox>
+      </b-field>
+      <b-field>
+        <b-checkbox v-model="termos">Eu concordo com os Termos e Condições de Uso da Doei.</b-checkbox>
+      </b-field>
+      
+      <b-button @click="cadastrar()" type="is-primary">Cadastrar</b-button>
 
 
     </section>
 </template>
 
 <script>
+import DatePick from 'vue-date-pick';
+import 'vue-date-pick/dist/vueDatePick.css';
 export default {
+    components: {DatePick},
     data() {
         return {
             labelPosition: 'on-border',
-            doador:{
+            doador: {
+              email:''
+            },
+            currentUser: null,
+            termos: false
+        };
+    },
+
+    created() {
+        var self = this;
+        //Busca o usuario logado para já preencher o e-mail na tela de cadastro
+        this.axios.get('currentuser/').then((response) => {
+            console.log(response);
+            self.currentUser = response.data;
+            if (response.data) {
+                self.doador.email = response.data.username;
             }
-        }
+        });
     },
 
     methods: {
-      cadastrar() {
-          var self = this;
-          //Chama a api para criar o usuário
-          this.axios.post('doadores-create/', this.doador).then((response) => {
-            console.log(response);
+        cadastrar() {
+            var self = this;
+            if(!this.termos) {
+              self.$buefy.dialog.alert('Você precisa aceitar os termos para se cadastrar!');
+            }else{
+              //Chama a api para criar o usuário
+              this.axios.post('doadores-create/', this.doador).then((response) => {
+                  console.log(response);
 
-            //Mostra a mensagem de sucesso
-            self.$buefy.dialog.alert('Cadastro realizado com sucesso!')
-          })        
-      }
-    } 
- }
+                  //Mostra a mensagem de sucesso
+                  self.$buefy.dialog.alert('Cadastro realizado com sucesso!');
+
+                  //Navega para a home após o cadastro, pode ser alterado para qualquer rota
+                  self.$router.replace({ name: 'Home', force:true });
+              });
+            }
+        },
+    },
+};
 </script>

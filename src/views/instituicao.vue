@@ -42,7 +42,7 @@
 
               <br>
               <a href="#/carrinho">
-                <b-button type="is-primary">Adicionar </b-button>
+                <b-button type="is-primary" @click="adicionarCarrinho(produto)">Adicionar </b-button>
               </a>
               
             </div>
@@ -68,7 +68,25 @@
           this.axios.get('instituicoes/'+ this.$route.params.id).then((response) => {
             self.instituicao = response.data;
           })
-        }
+        },
+        methods: {
+          adicionarCarrinho(produto) {
+            var self = this;
+            var item = {
+              produto: produto.id
+            }
+            //Chama a api para criar o usuário
+            this.axios.post('item-pedido-create/', item).then((response) => {
+              console.log(response);
+
+              //Mostra a mensagem de sucesso
+              self.$buefy.dialog.alert('Produto adicionado com sucesso!')
+
+              //Navega para o MeusPedidos
+              self.$router.push({ name: 'Carrinho', force:true });
+            })            
+          }
+        }        
     }
     
         

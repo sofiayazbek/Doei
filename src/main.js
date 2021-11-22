@@ -53,8 +53,8 @@ Vue.use(VueAxios, axios);
 //Vue.axios.defaults.baseURL = "https://testedjango.robsonjoo.repl.co/api/";
 Vue.axios.defaults.baseURL = "/api/";
 Vue.axios.defaults.withCredentials = true;
-//Vue.axios.defaults.xsrfCookieName = "csrftoken";
-//Vue.axios.defaults.xsrfHeaderName = "X-CSRFToken";
+Vue.axios.defaults.xsrfCookieName = "csrftoken";
+Vue.axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 /*
 Vue.axios.interceptors.request.use(async (request) => {

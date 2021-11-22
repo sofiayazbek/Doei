@@ -4,10 +4,13 @@
       <h1 class="title">Seu carrinho de compras</h1>
       <hr style="width:70px; background-color:#ff0000">
       <br>
+      
 
-
+      <section class="section" v-for="(pedido, index) in pedidos" :key="index">
+        <h1 class="title">Pedido Nº {{pedido.id}}</h1>
+        <h1 class="subtitle"><b>Total do pedido:</b> {{pedido.valorTotal}}</h1>
         <b-table
-            :data="isEmpty ? [] : data"
+            :data="isEmpty ? [] : pedido.itens"
             :bordered="isBordered"
             :striped="isStriped"
             :narrowed="isNarrowed"
@@ -21,18 +24,20 @@
             </b-table-column>
 
             <b-table-column field="produto" label="Produto" :td-attrs="columnTdAttrs" centered v-slot="props">
-                {{ props.row.produto }}
+                {{ props.row.produto.nome }}
             </b-table-column>
 
             <b-table-column field="quantidade" label="Quantidade" :td-attrs="columnTdAttrs" centered v-slot="props">
                 {{ props.row.quantidade }}
             </b-table-column>
 
+            <!--
             <b-table-column field="date" label="Data de entrega para a Instituição" :th-attrs="dateThAttrs" :td-attrs="columnTdAttrs" centered v-slot="props">
                 <span class="tag is-success">
                     {{ new Date(props.row.date).toLocaleDateString() }}
                 </span>
             </b-table-column>
+            -->
 
             <b-table-column label="Preço" :td-attrs="columnTdAttrs" left v-slot="props">
                 <span>
@@ -42,7 +47,7 @@
 
             <b-table-column label="Remover" :td-attrs="columnTdAttrs" centered v-slot="props">
                 <span>
-                  <button class="delete"></button>
+                  <button class="delete" @click="removerCarrinho(props.row)"></button>
                     {{ props.row.remover }}
                 </span>
             </b-table-column>
@@ -55,6 +60,9 @@
 
 
         </b-table>
+      </section>
+
+        
         
       <br>
       <a href="#/pagamento">
@@ -85,39 +93,63 @@
                 isHoverable: false,
                 isFocusable: false,
                 isLoading: false,
-                hasMobileCards: true
+                hasMobileCards: true,
+                pedidos: []
             }
         },
+        created() {
+          this.loadPedidos();
+        },
+
         methods: {
-            dateThAttrs(column) {
-                return column.label === 'Date' ? {
-                    title: 'This title is sponsored by "th-attrs" prop',
-                    class: 'has-text-success'
-                } : null
-            },
-            columnTdAttrs(row, column) {
-                if (row.id === 'Total') {
-                    if (column.label === 'ID') {
-                        return {
-                            colspan: 4,
-                            class: 'has-text-weight-bold',
-                            style: {
-                                'text-align': 'left !important'
-                            }
-                        }
-                    } else if (column.label === 'Preço') {
-                        return {
-                            class: 'has-text-weight-semibold'
-                        }
-                    } else {
-                        return {
-                            style: {display: 'none'}
-                        }
-                    }
-                }
-                return null
-            }
-        }
+          loadPedidos() {
+            var self = this;
+            this.axios.get('pedidos/').then((response) => {
+              console.log(response);
+              self.pedidos = response.data;
+            })
+
+          },
+          removerCarrinho(item) {
+            var self = this;
+            //Chama a api para criar o usuário
+            this.axios.delete(`item-pedido-create/${item.id}`, item).then((response) => {
+              console.log(response);
+              //Mostra a mensagem de sucesso
+              self.$buefy.dialog.alert('Produto removido com sucesso!')
+              self.loadPedidos();
+            })            
+          },
+          dateThAttrs(column) {
+              return column.label === 'Date' ? {
+                  title: 'This title is sponsored by "th-attrs" prop',
+                  class: 'has-text-success'
+              } : null
+          },
+
+          columnTdAttrs(row, column) {
+              if (row.id === 'Total') {
+                  if (column.label === 'ID') {
+                      return {
+                          colspan: 4,
+                          class: 'has-text-weight-bold',
+                          style: {
+                              'text-align': 'left !important'
+                          }
+                      }
+                  } else if (column.label === 'Preço') {
+                      return {
+                          class: 'has-text-weight-semibold'
+                      }
+                  } else {
+                      return {
+                          style: {display: 'none'}
+                      }
+                  }
+              }
+              return null
+          }
+        } 
     }
 </script>
 

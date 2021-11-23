@@ -123,7 +123,9 @@
               </figure>              
             </div>
             <div class="column">             
+              <a href="#/transparencia">             
               <h1 class="title">Transparência</h1>
+              </a>
               <h2 class="subtitle">A Doei acredita muito na transparência do processo de doações, se esforçando para tornar visível e compreensível as tomadas de decisões e gerenciamento das ações. Buscando construir uma relação de confiança entre a Doei, doadores e instituições.</h2>
             </div>
           </div>

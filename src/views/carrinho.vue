@@ -60,14 +60,29 @@
 
 
         </b-table>
-      </section>
-
-        
+      </section>     
         
       <br>
-      <a href="#/pagamento">
-        <button class="button is-danger">Continuar</button>
-      </a>
+
+      <nav class="level">
+        <div class="level-left">
+          <p class="level-item">
+            <a href="#/instituicoesparceiras">
+              <button class="button is-danger">Continuar comprando</button>
+            </a>
+          </p>
+        </div>
+
+        <div class="level-right">
+          <p class="level-item">
+            <a href="#/pagamento">
+              <button class="button is-danger">Continuar para pagamento</button>
+            </a>
+          </p>
+        </div>
+      </nav>
+
+
 
     </section>
 </template>

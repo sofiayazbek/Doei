@@ -7,7 +7,7 @@
         <div class="content has-text-centered">
           <p>
             Criado por
-            Alunos 4º período do curso de Negócios Digitais da
+            Alunos do 4º período do curso de Negócios Digitais da
             <a href="https://fae.edu" target="_blank">FAE Centro Universitário</a>
           </p>
         </div>
@@ -19,6 +19,10 @@
           &nbsp;
           <a href="https://www.instagram.com/doei.brasil/" target="_blank" class="is-size-2">
               <i class="fab fa-instagram"></i>
+          </a> 
+          &nbsp;
+          <a href="https://www.instagram.com/doei.brasil/" target="_blank" class="is-size-2">
+              <i class="fab fa-whatsapp"></i>
           </a>  
         </div>          
 

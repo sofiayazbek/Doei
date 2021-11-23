@@ -14,9 +14,37 @@
       <br>
       <p class= "is-size-6">Após o pagamento, envie seu comprovante para o nosso WhatsApp: <br></p>
       <br>
-      <a>
-        <button class="button is-danger">Enviar comprovante</button>
-      </a>
+
+      <nav class="level">
+        <div class="level-left">
+          <p class="level-item">
+            <a>
+              <button class="button is-danger">Enviar comprovante</button>
+            </a>
+          </p>
+        </div>
+
+        <div class="level-right">
+          <p class="level-item">
+            <a href="#/">
+              <b-button type="is-danger" @click="finalizar()">Finalizar </b-button>
+            </a>
+          </p>
+        </div>
+      </nav>
+
 
     </section>
 </template>
+
+
+<script>
+    export default {
+        methods: {
+            finalizar() {
+                this.$buefy.dialog.alert('Doação feita com sucesso!')
+            },
+
+        }
+    }
+</script>

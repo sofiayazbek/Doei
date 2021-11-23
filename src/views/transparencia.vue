@@ -35,7 +35,7 @@
                 <h1 class="title">Sopa da Tia Celina</h1>
                 <br>
                   <div class="buttons has-text-auto">
-                    <b-button
+                    <b-button 
                         label="Veja o que já foi feito"
                         type="is-primary"
                         size="is-medium"

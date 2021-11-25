@@ -56,6 +56,12 @@ Vue.axios.defaults.withCredentials = true;
 Vue.axios.defaults.xsrfCookieName = "csrftoken";
 Vue.axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
+
+
+Vue.filter('f-currency', function (vlr) {
+    return (vlr !== undefined) ? vlr.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
+})
+
 /*
 Vue.axios.interceptors.request.use(async (request) => {
     try {

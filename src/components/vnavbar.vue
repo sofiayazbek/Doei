@@ -109,8 +109,29 @@ export default {
       }
     },  
     methods: {
+      posLogin(response) {
+        var self = this;
+        console.log('resposta do login');
+        console.log('logado', response);
+        var data = response.data;
+        if(data && data.id) {
+          self.$store.dispatch('setCurrentUser', data);
+
+          self.axios.get('currentdoador/').then((responseUsuario) => {
+            console.log('usuario logado');
+            console.log(responseUsuario.data);
+            //Coloque aqui a rota para quem já está cadastrado
+            self.$router.push({ name: 'Home', force:true, reload:true });
+          }).catch(function (error) {
+            console.log('nao existe usuario cadastrado', error)
+            //Coloque aqui a sua rota de cadastro
+            self.$router.push({ name: 'Cadastro', force:true, reload:true });
+          })
+        }
+      },
       entrarCadastrar() {
         var provider = new GoogleAuthProvider();
+
         var self = this;
         const auth = getAuth();
         signInWithPopup(auth, provider).then((result) => {
@@ -118,16 +139,13 @@ export default {
             var pass = result.user.uid;
             var email = result.user.email;
             console.log(email, pass);
+
             const formData = new FormData();
             formData.append('username', email);
             formData.append('password', pass);
             
             self.axios.post('login/', formData).then((response) => {
-              console.log('resposta do login');
-              console.log('logado', response);
-              self.$store.dispatch('setCurrentUser', response.data);
-              //Aqui vai sua rota de cadastro
-              self.$router.push({ name: 'Cadastro', force:true, reload:true });
+              self.posLogin(response);
             }).catch(function (error) {
               console.log('error', error);
               if (error.response && error.response.data) {
@@ -138,16 +156,13 @@ export default {
                 self.axios.post('user-registration/', user).then((responseUr) => {
                   console.log(responseUr);
                   self.axios.post('login/', formData).then((responseLogin) => {
-                    console.log('logado', responseLogin);
-                    self.$store.dispatch('setCurrentUser', responseLogin.data);
-                    
-                    //Aqui vai sua rota de cadastro
-                    self.$router.push({ name: 'Cadastro', force:true, reload:true });
+                    self.posLogin(responseLogin);
                   });
                 });
               }
               
             });
+
         }).catch((error) => {
             console.log(error);
         });

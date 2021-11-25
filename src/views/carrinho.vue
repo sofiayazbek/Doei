@@ -60,6 +60,17 @@
 
 
         </b-table>
+        <div v-if="pedido.finalizado">
+          Pedido finalizado 
+        </div>
+        <div v-else class="level-right">
+          <p class="level-item">
+            <router-link class="button is-danger" :to="{path:'pagamento',query:{id:pedido.id}}">
+              Continuar para pagamento
+            </router-link>            
+          </p>
+        </div>
+
       </section>     
         
       <br>
@@ -73,13 +84,7 @@
           </p>
         </div>
 
-        <div class="level-right">
-          <p class="level-item">
-            <a href="#/pagamento">
-              <button class="button is-danger">Continuar para pagamento</button>
-            </a>
-          </p>
-        </div>
+        
       </nav>
 
 

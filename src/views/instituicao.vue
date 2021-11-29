@@ -34,7 +34,7 @@
               <div class="media-content has-text-centered">
                 <p class="title is-4">{{produto.nome}}</p>
                 <p class="subtitle is-6">{{produto.descricao}}</p>
-                <p class="subtitle is-6">R$ {{produto.preco}}</p>
+                <p class="subtitle is-6">{{produto.preco | f-currency}}</p>
               </div>
             </div>
 
@@ -73,7 +73,8 @@
           adicionarCarrinho(produto) {
             var self = this;
             var item = {
-              produto: produto.id
+              produto: produto.id,
+              instituicao:this.instituicao.id
             }
             //Chama a api para criar o usuário
             this.axios.post('item-pedido-create/', item).then((response) => {
@@ -83,7 +84,7 @@
               self.$buefy.dialog.alert('Produto adicionado com sucesso!')
 
               //Navega para o MeusPedidos
-              self.$router.push({ name: 'Carrinho', force:true });
+              self.$router.push({ name: 'Carrinho', force:true, refresh:true });
             })            
           }
         }        

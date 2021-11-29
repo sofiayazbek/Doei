@@ -1,16 +1,16 @@
 <template>
     <section v-id="pedido">
 
-
-      <h1 class="title">Pedido Nº {{pedido.id}}</h1>
-      <h1 class="title">Valor: {{pedido.valorTotal | f-currency}}</h1>
-
       <div v-if="pedido.finalizado">
         Pedido finalizado/pago
       </div>
       <div v-else>
         <h1 class="title">Finalizar pagamento</h1>
         <hr style="width:70px; background-color:#ff0000">
+
+
+        <h4 class="title is-4">Pedido Nº {{pedido.id}}</h4>
+        <h4 class="title is-4">Valor: {{pedido.valorTotal | f-currency}}</h4>
         
         <p class= "is-size-6">Nosso modelo de pagamento por enquanto é o pix, estamos em fase de desenvolvimento e logo teremos outras formas para melhor atendê-los. <br></p>
         <br>

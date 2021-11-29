@@ -20,13 +20,21 @@
         <template #end>
           <b-navbar-item tag="div">
                 <b-input v-model="name" placeholder="Busca"></b-input>
-            </b-navbar-item>
-            <b-navbar-item tag="div">
-                <a href="#/carrinho">
-                  <b-button class="cart-button"
-                  icon-right="shopping-cart" />
-                </a>
-            </b-navbar-item>
+          </b-navbar-item>
+
+          <b-navbar-item tag="div">
+            <a href="#/meuspedidos">
+              <button class="button">Meus pedidos</button>
+            </a>
+                
+          </b-navbar-item>
+
+          <b-navbar-item tag="div">
+              <a href="#/carrinho">
+                <b-button class="cart-button"
+                icon-right="shopping-cart" />
+              </a>
+          </b-navbar-item>
             <template v-if="currentUser">
               <b-navbar-item tag="div">
                   {{currentUser.username}}

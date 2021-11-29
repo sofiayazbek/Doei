@@ -173,9 +173,9 @@ export default {
     data(){
         return {
             carousels: [
+                { imagem: require('@/assets/1.png') },
                 { imagem: require('@/assets/2.png') },
                 { imagem: require('@/assets/3.png') },
-                { imagem: require('@/assets/1.png') },
                 { imagem: require('@/assets/4.png') },
                 { imagem: require('@/assets/2.png') }
             ]

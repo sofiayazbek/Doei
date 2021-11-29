@@ -1,7 +1,7 @@
 <template>
     <section>
 
-      <h1 class="title">Seu carrinho de compras</h1>
+      <h1 class="title">Meus pedidos</h1>
       <hr style="width:70px; background-color:#ff0000">
       <br>
       
@@ -50,12 +50,6 @@
               </div>
             </b-table-column>
 
-            <b-table-column label="Remover" :td-attrs="columnTdAttrs" centered v-slot="props">
-                <span>
-                  <button class="delete" @click="removerCarrinho(props.row)"></button>
-                    {{ props.row.remover }}
-                </span>
-            </b-table-column>
 
             <template #empty>
                 <div class="has-text-centered">Seu carrinho está vazio :( </div>
@@ -69,14 +63,6 @@
         <br>
 
         <nav class="level">
-
-          <div class="level-left">
-            <p class="level-item">
-              <a href="#/instituicoesparceiras">
-                <button class="button is-danger">Continuar comprando</button>
-              </a>
-            </p>
-          </div>
 
           <div v-if="pedido.finalizado">
             Pedido finalizado 
@@ -133,7 +119,7 @@
         methods: {
           loadPedidos() {
             var self = this;
-            this.axios.get('pedidos/').then((response) => {
+            this.axios.get('pedidos-finalizado/').then((response) => {
               console.log(response);
               self.pedidos = response.data;
             })
@@ -145,7 +131,7 @@
             this.axios.delete(`item-pedido-create/${item.id}`, item).then((response) => {
               console.log(response);
               //Mostra a mensagem de sucesso
-              self.$buefy.dialog.alert('Produto removido do carrinho!')
+              self.$buefy.dialog.alert('Produto removido com sucesso!')
               self.loadPedidos();
             })            
           },
@@ -181,11 +167,6 @@
         } 
     }
 </script>
-
-
-
-
-
 
 
 

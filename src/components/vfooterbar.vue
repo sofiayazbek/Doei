@@ -21,7 +21,7 @@
               <i class="fab fa-instagram"></i>
           </a> 
           &nbsp;
-          <a href="https://www.instagram.com/doei.brasil/" target="_blank" class="is-size-2">
+          <a href="https://wa.me/message/4JFYOXXBORT6P1" target="_blank" class="is-size-2">
               <i class="fab fa-whatsapp"></i>
           </a>  
         </div>          

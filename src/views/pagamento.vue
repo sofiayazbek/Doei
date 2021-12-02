@@ -16,7 +16,7 @@
         <br>
         <br>
       
-        <h1 class="title has-text-centered"> PIX: 106.576.769-26 </h1>
+        <h1 class="title has-text-centered"> PIX: 41992456683 </h1>
         <br>
         <br>
         <br>
@@ -27,7 +27,7 @@
           <div class="level-left">
             <p class="level-item">
 
-              <a class="button is-danger" href="https://web.whatsapp.com/send?phone=5599111112222" target="_blank">
+              <a class="button is-danger" href="https://wa.me/message/4JFYOXXBORT6P1" target="_blank">
               Enviar comprovante</a>
 
             </p>
